@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         if(count > 3) {
           observer.error(new Error('Count is greater than 3'));
         }
-      }, 1000);
+      }, 3000);
     })
 
 
@@ -89,6 +89,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    console.log("observable destroyed!");
     this.firstObsSubscription.unsubscribe();
   }
 
