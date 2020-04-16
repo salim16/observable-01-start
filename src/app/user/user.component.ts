@@ -15,8 +15,8 @@ export class UserComponent implements OnInit {
 
   // When Routing is used, component is loaded only when there is change in the route. 
   // or change in URL for that matter. Corresponding component is loaded when URL changes.
-  // if the URL has some dynamic parameter, or path param like in this case, then user component won't get 
-  // loaded again and again.
+  // if the URL has some dynamic parameter, or path param like in this case, 
+  // then user component won't get loaded again and again.
 
   ngOnInit() {
     console.log("User Component is loaded ... ");
@@ -26,6 +26,7 @@ export class UserComponent implements OnInit {
   }
 
   onActivate() {
+    //this.userService.activatedEmitter.emit(true);
     this.userService.activatedEmitter.next(true);
   }
 }

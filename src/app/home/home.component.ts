@@ -12,14 +12,16 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   // There are some observables which continuosly keep on emitting, even if you no more using that
   // component, and if you navigate somewhere else, and again come back on the same component,
-  // one more instance of subscription would start, and one more if you again come back to this component
-  // thus it will make the App slower and slower.
-  // To avoid this you need to explicitly unsubscribe from the subscription when the component is destroyed
-  // Now there are some subscription in which the unsubscription part is taken care by Angular, therefore
-  // we need not/ should not take care of such unsubscription
-  // We only unsubscribe in custom observables, and some subscriptions which angular does not unsubscribe itself,
-  // need to check that one
-  // Also there are some observables like HTTP observable, which only emits once, here there is no need to unsubscribe.
+  // one more instance of subscription would start, and one more if you 
+  // again come back to this component, thus it will make the App slower and slower.
+  // To avoid this you need to explicitly unsubscribe from the subscription 
+  // when the component is destroyed. Now in case of built in Observables like params, the 
+  // unsubscription part is taken care by Angular, therefore we need not/should not take care
+  // of such unsubscription.
+  // We only unsubscribe in custom observables, and some subscriptions which angular 
+  // does not unsubscribe itself, need to check that one
+  // Also there are some observables like HTTP observable, which only emits once, 
+  // here there is no need to unsubscribe.
 
 
   // Also whenever an observable throws an error, it dies, it ends, and does not emit further.
@@ -29,6 +31,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor() { }
 
+  // here we are creating observable and then subscribing to it both in ngOnInit method
   ngOnInit() {
     console.log("home component was loaded ... ");
     // this.firstObsSubscription = interval(1000).subscribe( count => {
@@ -69,12 +72,15 @@ export class HomeComponent implements OnInit, OnDestroy {
     //   console.log('Error, executes when error occurs, takes error as a parameter')
     //   alert(error.message);
     // }, () => {
-    //   console.log('Completed, executes when observable completes, good for clean up work, takes no parameters')
+    //   console.log('Completed, executes when observable completes,' 
+    //   + 'good for clean up work, takes no parameters')
     // });
 
+    // with pipe method we can use one or more operators, as below we 
+    // used more than one operators which is filter and map
     this.firstObsSubscription = customIntervalObservable.pipe(filter(data => {
       return data > 0;
-    }) ,map((data: number) => {
+    }), map((data: number) => {
       return 'Round: ' + (data + 1);
     })).subscribe(data => {
       console.log(data);
@@ -83,7 +89,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       console.log('Error, executes when error occurs, takes error as a parameter')
       alert(error.message);
     }, () => {
-      console.log('Completed, executes when observable completes, good for clean up work, takes no parameters')
+      console.log('Completed, executes when observable completes, good for clean up work,'
+      + 'takes no parameters')
     });
 
   }
